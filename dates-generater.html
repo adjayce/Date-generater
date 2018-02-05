@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<script>
+    function generateDates(){
+        let bd = document.getElementById('begin-date').value;
+        newBd = bd.split('');
+        newBd.splice(4, 0, '/');
+        newBd.splice(7, 0, '/');
+        newBd = newBd.join('');
+        newBeginDate = new Date(newBd);
+
+        let ed = document.getElementById('end-date').value;
+        newEd = ed.split('');
+        newEd.splice(4, 0, '/');
+        newEd.splice(7, 0, '/');
+        newEd = newEd.join('');
+        newEndDate = new Date(newEd);
+
+        let c1 = document.getElementById('monday').checked;
+        let c2 = document.getElementById('tuesday').checked;
+        let c3 = document.getElementById('wednesday').checked;
+        let c4 = document.getElementById('thursday').checked;
+        let c5 = document.getElementById('friday').checked;
+        let c6 = document.getElementById('saturday').checked;
+        let c7 = document.getElementById('sunday').checked;
+        let days = [];
+        for (var i = 1; i <= 7; i++) {
+            if (eval('c'+i)) {
+                days.push(i);
+            }
+        }
+        //        debugger
+        let ul = document.getElementById('dates');
+        while (newBeginDate < newEndDate) {
+            if (days.indexOf(newBeginDate.getDay()) > -1) {
+                // res.push(newBeginDate);
+                let tmp = document.createElement('li');
+                let text = newBeginDate.toISOString();
+                text = text.split('');
+                text.splice(10);
+                text.splice(4,1);
+                text.splice(6,1);
+                tmp.innerHTML = text.join('');
+                ul.appendChild(tmp);
+            }
+            newBeginDate.setDate(newBeginDate.getDate() + 1);
+        }
+    }
+</script>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Dates</title>
+  </head>
+  <body>
+    <h2>Specify Date Range</h2>
+    Begin Date (YYYYMMDD): <input type="text" id="begin-date"></input>
+    <br><br>
+    End Date (YYYYMMDD): <input type="text" id="end-date"></input>
+    <br><br>
+    <input type="checkbox" id="monday"> </input><label for="monday">Monday</label>
+    <input type="checkbox" id="tuesday"> </input><label for="tuesday">Tuesday</label>
+    <input type="checkbox" id="wednesday"> </input><label for="wednesday">Wednesday</label>
+    <input type="checkbox" id="thursday"> </input><label for="thursday">Thursday</label>
+    <input type="checkbox" id="friday"> </input><label for="friday">Friday</label>
+    <input type="checkbox" id="saturday"> </input><label for="saturday">Saturday</label>
+    <input type="checkbox" id="sunday"> </input><label for="sunday">Sunday</label>
+    <br><br>
+    <input type="submit" value="Generate" onclick="generateDates()">
+    <ul id="dates">
+
+    </ul>
+  </body>
+</html>

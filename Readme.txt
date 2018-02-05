@@ -1,0 +1,1 @@
+This project is to develop a date generator which can be used to generate a list of dates for recurrent rides by user. In this project, we just use JavaScript to implement the function. Without using any date picker or selector library and UI plugin.
